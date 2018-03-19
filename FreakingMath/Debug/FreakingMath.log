@@ -1,0 +1,6 @@
+﻿  FreakingMain.cpp
+c:\users\admin\documents\visual studio 2017\projects\freakingmath\freakingmath\freakingmain.cpp(117): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\admin\documents\visual studio 2017\projects\freakingmath\freakingmath\freakingmain.cpp(123): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\admin\documents\visual studio 2017\projects\freakingmath\freakingmath\freakingmain.cpp(129): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  FreakingMath.vcxproj -> C:\Users\ADMIN\Documents\Visual Studio 2017\Projects\FreakingMath\Debug\FreakingMath.exe
+  FreakingMath.vcxproj -> C:\Users\ADMIN\Documents\Visual Studio 2017\Projects\FreakingMath\Debug\FreakingMath.pdb (Partial PDB)
