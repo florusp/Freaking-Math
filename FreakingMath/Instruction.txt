@@ -1,0 +1,11 @@
+						Welcome to Freaking Math.
+
+					Here is some instructions for the game:
+			
+				- Press 1 or 2 to choose the answer. 1 for TRUE and 2 for FALSE.
+				- You must be quick, the game only give you 2 seconds to make an answer.
+				- Let's see how you make it!
+			
+					```````````````````````````````````````
+						    Press SPACE to start. 
+						    Press ESC to quit.
