@@ -10,59 +10,101 @@
 
 using namespace std;
 
-int flag;
-int timeCounter = 2;
-int level = 1;
-int _1stNum,_2ndNum;
-int result;
-int randomResult;
-int checkOperator;
-int score = 0;
-int range = 3;
-int Best_Score;
-char Operator;
-bool check;
-bool ans;
 
-void instruction(int &flag);
-void delay(int ms);
-void randomThe_1stNumber(int &num, int &range);
-void randomThe_2ndNumber(int &num, int &num1, int &range);
-void randomOperator(int &checkOperator, int &level);
-void resultRandom(int num1, int num2, int checkOperator, char &Operator,  int &result, int &randomResult);
-void TheQuestion(int num1, int num2, int checkOperator, char Operator, int &result, int &randomResult);
-void TheAnswer(bool &ans, int &flag);
-void checkTheAnswer(bool &ans, bool &check, int &flag, int &result, int &randomResult);
-void option(int &flag);
-void Score(int flag, int &score);
-void addBestScore(int &Best_Score);
-void BestScore(int &Best_Score);
-void updateLevel(int &score, int &level, int &range);
+struct So
+{
+	int _1stNum, _2ndNum;
+	int result, randomResult;
+};
+
+struct Toantu                            // struct of Operator 
+{
+	char Operator;
+	int checkOperator;
+};
+
+struct Diem
+{
+	int score = 0;
+	int Best_Score;
+};
+
+struct Capdo
+{
+	int level = 1;
+	int range = 3;
+};
+
+struct DieuKienTroChoi
+{
+	int flag;
+	int timeCounter = 2;
+
+	void delay(int ms)
+	{
+		clock_t timeDelay = ms + clock();
+		while (timeDelay > clock());
+	}
+
+};
+
+struct TraLoi
+{
+	bool checkAns;
+	bool ans;
+};
+
+void instruction(DieuKienTroChoi &dieukien);
+
+void randomOperator(Toantu &toantu, Capdo &capdo);
+
+void randomThe_1stNumber(So &so, Capdo &capdo);
+void randomThe_2ndNumber(So &so, Capdo &capdo, Toantu &toantu);
+void resultRandom(So &so, Toantu &toantu);
+
+void TheQuestion(So &so, Toantu &toantu, Capdo &capdo);
+
+void TheAnswer(TraLoi &traloi, DieuKienTroChoi &dieukien, So &so);
+void checkTheAnswer(TraLoi &traloi, DieuKienTroChoi &dieukien, So &so);
+
+void Score(DieuKienTroChoi &dieukien, Diem &diem);
+void addBestScore(Diem &diem);
+void BestScore(Diem &diem);
+
+void updateLevel(Diem &diem, Capdo &capdo);
+
+void option(DieuKienTroChoi &dieukien);
 
 int main()
 {
-	instruction(flag);
-	while (flag == 1)
+	So so;
+	Toantu toantu;
+	Diem diem;
+	Capdo capdo;
+	TraLoi traloi;
+	DieuKienTroChoi dieukien;
+
+	instruction(dieukien);
+	while (dieukien.flag == 1)
 	{
-		while (flag == 1)
+		while (dieukien.flag == 1)
 		{
-			TheQuestion(_1stNum, _2ndNum, checkOperator, Operator, result, randomResult);
-			TheAnswer(ans,flag);
-			Score(flag,score);
-			updateLevel(score, level, range);
-			timeCounter = 2;
+			TheQuestion(so, toantu, capdo);
+			TheAnswer(traloi, dieukien, so);
+			Score(dieukien, diem);
+			updateLevel(diem, capdo);
+			dieukien.timeCounter = 2;
 		}
-		option(flag);
+		option(dieukien);
 	}
-	system("pause");
 }
 
-void instruction(int &flag)
+void instruction(DieuKienTroChoi &dieukien)
 {
 	ifstream intro("Instruction.txt");
 	string word;
 	char c;
-	
+
 	while (!intro.eof())
 	{
 		c = intro.get();
@@ -73,166 +115,162 @@ void instruction(int &flag)
 	switch (_getch())
 	{
 	case 32:
-		flag = 1;
+		dieukien.flag = 1;
 		break;
 	case 27:
 		exit(0);
-		flag = 2;
+		dieukien.flag = 2;
 		break;
 	}
+	system("cls");
 }
 
-void option(int &flag)
+void option(DieuKienTroChoi &dieukien)
 {
 	cout << "\n\nDo you want to play again? Press 1 to continue or 2 to quit: ";
 	switch (_getch())
 	{
 	case 49:
-		flag = 1;
+		dieukien.flag = 1;
 		break;
 	case 50:
-		flag = 2;
+		dieukien.flag = 2;
 		break;
 	}
 }
 
-void delay(int ms)
-{
-	clock_t timeDelay = ms + clock();
-	while (timeDelay > clock());
-}
 
-void randomOperator(int &checkOperator, int &level)
+void randomOperator(Toantu &toantu, Capdo &capdo)
 {
-	if (level % 2 == 1)
-		checkOperator = rand() % 1 + 1;
+	if (capdo.level % 2 == 1)
+		toantu.checkOperator = rand() % 1 + 1;
 	else
-		checkOperator = rand() % 2 + 1;
+		toantu.checkOperator = rand() % 2 + 1;
 }
 
-void randomThe_1stNumber(int &_1stNum, int &range)
+void randomThe_1stNumber(So &so, Capdo &capdo)
 {
-	_1stNum = rand() %  range + 1;
+	so._1stNum = rand() % capdo.range + 1;
 }
 
-void randomThe_2ndNumber(int &_2ndNum, int &_1stNum, int &range)
+void randomThe_2ndNumber(So &so, Capdo &capdo, Toantu &toantu)
 {
-	if (checkOperator == 1)
-		_2ndNum = rand() % range + 1;
+	if (toantu.checkOperator == 1)
+		so._2ndNum = rand() % capdo.range + 1;
 	else
-		_2ndNum = rand() % _1stNum + 1;
+		so._2ndNum = rand() % so._1stNum + 1;
 }
 
 
-void resultRandom(int _1stNum, int _2ndNum, int checkOperator, char &Operator, int &result, int &randomResult)
+void resultRandom(So &so, Toantu &toantu)
 {
-	switch (checkOperator)
+	switch (toantu.checkOperator)
 	{
-		case 1:
-			Operator = 43;
-			result = _1stNum + _2ndNum;
-			randomResult = rand() % 5 + (result - 2); // 5 la so gia tri co the co cua randomResult 
-			break;
-		case 2:
-			Operator = 45;
-			result = _1stNum - _2ndNum;
-			randomResult = rand() % 3 + result; 
-			break;
+	case 1:
+		toantu.Operator = 43;
+		so.result = so._1stNum + so._2ndNum;
+		so.randomResult = rand() % 5 + (so.result - 2); // 5 la so gia tri co the co cua randomResult 
+		break;
+	case 2:
+		toantu.Operator = 45;
+		so.result = so._1stNum - so._2ndNum;
+		so.randomResult = rand() % 3 + so.result;       // 3 la so gia tri co the co cua randomResult
+		break;
 	}
 }
 
-void TheQuestion(int _1stNum, int _2ndNum, int checkOperator, char Operator, int &result, int &randomResult)
+void TheQuestion(So &so, Toantu &toantu, Capdo &capdo)
 {
 	srand((unsigned int)time(NULL));
-	randomOperator(checkOperator, level);
-	randomThe_1stNumber(_1stNum, range);
-	randomThe_2ndNumber(_2ndNum, _1stNum, range);
-	resultRandom(_1stNum, _2ndNum, checkOperator, Operator, result, randomResult);
-	cout << "\n\nIs " << _1stNum << Operator << _2ndNum << "=" << randomResult << " correct? ";
+	randomOperator(toantu, capdo);
+	randomThe_1stNumber(so, capdo);
+	randomThe_2ndNumber(so, capdo, toantu);
+	resultRandom(so, toantu);
+	cout << "\n\nIs " << so._1stNum << toantu.Operator << so._2ndNum << "=" << so.randomResult << " correct? ";
 }
 
-void BestScore(int &Best_Score)
+void BestScore(Diem &diem)
 {
 	ifstream readBS("Best Score.txt");
-	readBS >> Best_Score;
+	readBS >> diem.Best_Score;
 	readBS.close();
 }
 
-void addBestScore(int &Best_Score)
+void addBestScore(Diem &diem)
 {
 	ofstream add("Best Score.txt");
-	add << Best_Score;
+	add << diem.Best_Score;
 	add.close();
 }
 
 
-void Score(int flag, int &score)
+void Score(DieuKienTroChoi &dieukien, Diem &diem)
 {
-	if (flag == 1)
+	if (dieukien.flag == 1)
 	{
-		score++;
-		cout << "    | Score: " << score;
+		diem.score++;
+		cout << "    | Score: " << diem.score;
 	}
 	else
 	{
-		BestScore(Best_Score);
-		if (score >= Best_Score)
+		BestScore(diem);
+		if (diem.score >= diem.Best_Score)
 		{
-			Best_Score = score;
-			addBestScore(Best_Score);
+			diem.Best_Score = diem.score;
+			addBestScore(diem);
 		}
-		cout << "\n\nYou've got: " << score << " | Best Score: " << Best_Score;
-		score = 0;
+		cout << "\n\nYou've got: " << diem.score << " | Best Score: " << diem.Best_Score;
+		diem.score = 0;
 	}
 }
 
-void updateLevel(int &score, int &level, int &range)
+void updateLevel(Diem &diem, Capdo &capdo)
 {
-	if (score % 10 == 0)
+	if (diem.score % 10 == 0)
 	{
-		level++;
-		if (score % 20 == 0)
-			range = 10;
+		capdo.level++;
+		if (diem.score % 20 == 0)
+			capdo.range = 10;
 	}
 	else
-		range++;
+		capdo.range++;
 }
-void checkTheAnswer(bool &ans, bool &check, int &flag, int &result, int &randomResult)
+void checkTheAnswer(TraLoi &traloi, DieuKienTroChoi &dieukien, So &so)
 {
-	if (result == randomResult)
-		check = true;
+	if (so.result == so.randomResult)
+		traloi.checkAns = true;
 	else
-		check = false;
+		traloi.checkAns = false;
 
-	if (ans == check)
+	if (traloi.ans == traloi.checkAns)
 	{
-		flag = 1;
+		dieukien.flag = 1;
 		cout << "TRUE";
 	}
 	else
 	{
-		flag = 2;
+		dieukien.flag = 2;
 		cout << "FALSE";
 	}
 }
 
-void TheAnswer(bool &ans, int &flag)
+void TheAnswer(TraLoi &traloi, DieuKienTroChoi &dieukien, So &so)
 {
-	while (timeCounter != 0)
+	while (dieukien.timeCounter != 0)
 	{
 		if (_kbhit())
 		{
 			switch (_getch())
 			{
 			case 49:
-				ans = true;
+				traloi.ans = true;
 				cout << "Yes | ";
-				checkTheAnswer(ans, check, flag, result, randomResult);
+				checkTheAnswer(traloi, dieukien, so);
 				break;
 			case 50:
-				ans = false;
+				traloi.ans = false;
 				cout << "No | ";
-				checkTheAnswer(ans, check, flag, result, randomResult);
+				checkTheAnswer(traloi, dieukien, so);
 				break;
 			default:
 				break;
@@ -241,15 +279,15 @@ void TheAnswer(bool &ans, int &flag)
 		}
 		else
 		{
-			timeCounter--;
-			if (timeCounter == 0)
+			dieukien.timeCounter--;
+			if (dieukien.timeCounter == 0)
 			{
 				cout << "You lose";
-				flag = 2;
+				dieukien.flag = 2;
 				break;
 			}
 			else
-				delay(1000);
+				dieukien.delay(1000);
 		}
 	}
 }
