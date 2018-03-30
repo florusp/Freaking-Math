@@ -1,4 +1,10 @@
 #include<iostream>
+#include<string>
+#include<fstream>
+
+using namespace std;
+
+#include<iostream>
 #include<cstdlib>
 #include<ctime>
 #include<conio.h>
@@ -75,6 +81,10 @@ void updateLevel(Diem &diem, Capdo &capdo);
 
 void option(DieuKienTroChoi &dieukien);
 
+void gotoxy(int x, int y);
+
+void draw(So &so, Toantu& toantu, Diem &diem, Capdo &capdo, DieuKienTroChoi &dieukien, TraLoi &traloi);
+
 int main()
 {
 	So so;
@@ -89,9 +99,7 @@ int main()
 	{
 		while (dieukien.flag == 1)
 		{
-			TheQuestion(so, toantu, capdo);
-			TheAnswer(traloi, dieukien, so);
-			Score(dieukien, diem);
+			draw(so, toantu, diem, capdo, dieukien, traloi);
 			updateLevel(diem, capdo);
 			dieukien.timeCounter = 2;
 		}
@@ -245,12 +253,13 @@ void checkTheAnswer(TraLoi &traloi, DieuKienTroChoi &dieukien, So &so)
 	if (traloi.ans == traloi.checkAns)
 	{
 		dieukien.flag = 1;
-		cout << "TRUE";
+		//cout << "TRUE";
+		system("cls");
 	}
 	else
 	{
 		dieukien.flag = 2;
-		cout << "FALSE";
+		//cout << "FALSE";
 	}
 }
 
@@ -264,12 +273,12 @@ void TheAnswer(TraLoi &traloi, DieuKienTroChoi &dieukien, So &so)
 			{
 			case 49:
 				traloi.ans = true;
-				cout << "Yes | ";
+				//cout << "Yes | ";
 				checkTheAnswer(traloi, dieukien, so);
 				break;
 			case 50:
 				traloi.ans = false;
-				cout << "No | ";
+				//cout << "No | ";
 				checkTheAnswer(traloi, dieukien, so);
 				break;
 			default:
@@ -290,4 +299,36 @@ void TheAnswer(TraLoi &traloi, DieuKienTroChoi &dieukien, So &so)
 				dieukien.delay(1000);
 		}
 	}
+}
+
+void gotoxy(int x, int y)
+{
+  static HANDLE h = NULL;  
+  if(!h)
+  h = GetStdHandle(STD_OUTPUT_HANDLE);
+  COORD c = { x, y };  
+  SetConsoleCursorPosition(h,c);
+}
+
+void draw(So &so, Toantu& toantu, Diem &diem, Capdo &capdo, DieuKienTroChoi &dieukien, TraLoi & traloi)
+{
+	string frame;
+	char c;
+	ifstream file("frame.txt");
+	while (!file.eof())
+	{
+		c = file.get();
+		frame = frame + c;
+	}
+	gotoxy(50,50);
+	cout << frame;
+	file.close();
+	
+	gotoxy(51,51);
+	TheQuestion(so, toantu, capdo);
+	gotoxy(54,52);
+	TheAnswer(traloi, dieukien, so);
+	gotoxy(60,60);
+	Score(dieukien, diem);
+	
 }
