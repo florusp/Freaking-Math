@@ -1,10 +1,4 @@
 #include<iostream>
-#include<string>
-#include<fstream>
-
-using namespace std;
-
-#include<iostream>
 #include<cstdlib>
 #include<ctime>
 #include<conio.h>
