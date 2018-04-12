@@ -174,7 +174,7 @@ int Play::Run(sf::RenderWindow &window)
 			resetLevel(diem, capdo);
 			return 2;
 		}
-		else
+		else if(dieukien.flag == 1 && diem.score > 0)
 		{
 			sf::Time elapsed = clock.getElapsedTime();
 			sf::Int32 countdown = elapsed.asMilliseconds();
