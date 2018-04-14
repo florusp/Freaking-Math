@@ -22,6 +22,8 @@ int Play::Run(sf::RenderWindow &window)
 	TraLoi traloi;
 
 	string S_num1, S_num2, S_RandomResult, S_countdown, S_score, S_calculation;
+	
+	int color;
 
 	bool checkplay;
 
@@ -113,6 +115,9 @@ int Play::Run(sf::RenderWindow &window)
 	
 
 	/////////////////////////////
+	
+	srand((unsigned int)time(NULL));
+	color = rand() % 6 + 1;
 
 	RandomQuestion(so, toantu, capdo);
 	Process_Calculation(so, toantu, S_num1, S_num2, S_calculation, text_calculation, font);
