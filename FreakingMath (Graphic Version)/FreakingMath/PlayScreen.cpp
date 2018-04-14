@@ -23,7 +23,7 @@ int Play::Run(sf::RenderWindow &window)
 
 	string S_num1, S_num2, S_RandomResult, S_countdown, S_score, S_calculation;
 	
-	int color;
+	int color;        // color of the background
 
 	bool checkplay;
 
@@ -164,7 +164,18 @@ int Play::Run(sf::RenderWindow &window)
 			}
 
 		}
-		window.clear(sf::Color::Green);
+		if (color == 1)
+			window.clear(sf::Color::Green);
+		else if (color == 2)
+			window.clear(sf::Color::Cyan);
+		else if (color == 3)
+			window.clear(sf::Color::Blue);
+		else if (color == 4)
+			window.clear(sf::Color::Red);
+		else if (color == 5)
+			window.clear(sf::Color::Magenta);
+		else
+			window.clear(sf::Color::Yellow);
 		window.draw(display_score);
 		window.draw(text_score);
 		window.draw(time_left);
