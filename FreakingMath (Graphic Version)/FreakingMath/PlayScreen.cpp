@@ -150,12 +150,12 @@ int Play::Run(sf::RenderWindow &window)
 					if (dieukien.flag == 1)
 					{
 						True.play();
+						
 						RandomQuestion(so, toantu, capdo);
 						Process_Calculation(so, toantu, S_num1, S_num2, S_calculation, text_calculation, font);
 						Process_Assign(toantu, text_assign, font);
 						Process_RandomResult(so, S_RandomResult, text_RandomResult, font);
-						Process_Assign(toantu, text_assign, font);
-						Process_RandomResult(so, S_RandomResult, text_RandomResult, font);
+					
 						updateLevel(diem, capdo);
 						clock.restart();
 					}
