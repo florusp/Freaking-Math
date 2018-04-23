@@ -1,18 +1,15 @@
 #include"PlayScreen.h"
 #include"ButtonPressed.h"
 #include"Processing.h"
-
+#include"WorkingWithScore.h"
 #include"WorkingWithQA.h"
 #include"WorkingWithLevel.h"
-#include"WorkingWithScore.h"
-
 #include"SFML/Audio.hpp"
 
 #include<iostream>
 
-
-
 using namespace std;
+
 
 int Play::Run(sf::RenderWindow &window)
 {
@@ -27,40 +24,39 @@ int Play::Run(sf::RenderWindow &window)
 
 	bool checkplay;   //bien kiem tra xem chuot co duoc bam khong
 
-	string S_num1, S_num2, S_RandomResult, S_countdown, S_score, S_calculation;
+	string S_num1, S_num2, S_RandomResult, S_countdown, S_score, S_calculation; //string of objects used to transform into text form
 
-	//////////////////////////////////
 
 	//declare text form of objects
-
 	sf::Text text_num1;
-
 	sf::Text text_num2;
-
 	sf::Text text_operator;
-
 	sf::Text text_calculation;
-
 	sf::Text text_assign;
-
 	sf::Text text_RandomResult;
-
 	sf::Text text_countdown;
-
 	sf::Text text_score;
 
-	////////////////////////////////////
 
-
-	sf::Font font;                            // load font
+	// load font chu
+	sf::Font font;                           
 	if (!font.loadFromFile("ANCUU.ttf"))
 	{
 		cout << "Error Loading File";
 	}
 
-	//////////////////////////
 
-	sf::Text time_left;                       // timer
+	// display your score
+	sf::Text display_score;                 
+	display_score.setFont(font);
+	display_score.setString("Score: ");
+	display_score.setPosition(380, 10);
+	display_score.setCharacterSize(20);
+	display_score.setFillColor(sf::Color::White);
+	display_score.setStyle(sf::Text::Bold);
+
+	//set timer
+	sf::Text time_left;                      
 	time_left.setFont(font);
 	time_left.setString("Time Left: ");
 	time_left.setPosition(380, 50);
@@ -68,18 +64,12 @@ int Play::Run(sf::RenderWindow &window)
 	time_left.setFillColor(sf::Color::White);
 	time_left.setStyle(sf::Text::Bold);
 
+
+	// set fixed time
 	sf::Clock clock;                        
-	sf::Time timeline = sf::seconds(1);      // set fixed time
+	sf::Time timeline = sf::seconds(1);    
 
-	///////////////////////////////////
 
-	sf::Text display_score;                 // display your score
-	display_score.setFont(font);
-	display_score.setString("Score: ");
-	display_score.setPosition(380, 10);
-	display_score.setCharacterSize(20);
-	display_score.setFillColor(sf::Color::White);
-	display_score.setStyle(sf::Text::Bold);
 
 	// load False Button for TRUE answer
 	sf::Texture TrueButton_Image;
@@ -89,10 +79,10 @@ int Play::Run(sf::RenderWindow &window)
 	}
 	sf::Sprite TrueButton;
 	TrueButton.setTexture(TrueButton_Image);
-	TrueButton.setPosition(sf::Vector2f(50, 500));
-	TrueButton.setTextureRect(sf::IntRect(0, 0, 237, 203));
+	TrueButton.setPosition(sf::Vector2f(65, 500));  // cai dat vi tri cua nut
+	TrueButton.setTextureRect(sf::IntRect(0, 0, 237, 203)); // cai dat do phan giai cua nut
 
-	//////////////////////////////////
+
 
 	// load False Button for FALSE answer
 	sf::Texture FalseButton_Image;
@@ -102,13 +92,11 @@ int Play::Run(sf::RenderWindow &window)
 	}
 	sf::Sprite FalseButton;
 	FalseButton.setTexture(FalseButton_Image);
-	FalseButton.setPosition(sf::Vector2f(320, 500));
-	FalseButton.setTextureRect(sf::IntRect(0, 0, 223, 206));
+	FalseButton.setPosition(sf::Vector2f(310, 500));  // cai dat vi tri cua nut
+	FalseButton.setTextureRect(sf::IntRect(0, 0, 223, 206));  // cai dat do phan giai cua nut
 
-	///////////////////////////////////
 
 	/*Load Sound*/
-
 	sf::SoundBuffer TrueSound;
 	if (!TrueSound.loadFromFile("TrueSound.flac"))
 	{
@@ -119,15 +107,15 @@ int Play::Run(sf::RenderWindow &window)
 	True.setBuffer(TrueSound);
 	
 
-	/////////////////////////////
 
 	/*random mau cua background*/
 	srand((unsigned int)time(NULL));
 	color = rand() % 6 + 1;
 	
+
 	// creat the first equation
 	RandomQuestion(so, toantu, capdo);
-	Process_Calculation(so, toantu, S_num1, S_num2, S_calculation, text_calculation, font); 
+	Process_Calculation(so, toantu, S_num1, S_num2, S_calculation, text_calculation, font);
 	Process_Assign(toantu, text_assign, font);
 	Process_RandomResult(so, S_RandomResult, text_RandomResult, font);
 
@@ -197,7 +185,7 @@ int Play::Run(sf::RenderWindow &window)
 			returnBestScore(dieukien, diem);
 			resetLevel(diem, capdo);
 
-			/*chuyen sang man hinh GameOver*/
+			/*tra gia tri cua ham Run de chuyen sang man hinh GameOver*/
 			return 2;  
 		}
 		else if(dieukien.flag==1&&diem.score>0)
