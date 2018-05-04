@@ -20,11 +20,12 @@ int Play::Run(sf::RenderWindow &window)
 	DieuKienTroChoi dieukien;
 	TraLoi traloi;
 
-	int color; // color of the background
+	int color; // mau background
 
 	bool checkplay;   //bien kiem tra xem chuot co duoc bam khong
 
-	string S_num1, S_num2, S_RandomResult, S_countdown, S_score, S_calculation; //string of objects used to transform into text form
+	// chuyen bien cua cac doi tuong tu dang string sang dang text de in ra man hinh
+	string S_num1, S_num2, S_RandomResult, S_countdown, S_score, S_calculation; 
 
 
 	//declare text form of objects
@@ -135,9 +136,9 @@ int Play::Run(sf::RenderWindow &window)
 
 				IsButtonPressed(TrueButton, FalseButton, window, checkplay, traloi);
 
-				checkTheAnswer(traloi, dieukien, so);  // checking if your answer is either true or false
+				checkTheAnswer(traloi, dieukien, so);  // kiem tra dap an dung hay sai 
 
-				addScore(dieukien, diem);              // add 1 to your score if you're right
+				addScore(dieukien, diem);              // cong 1 diem neu tra loi dung
 				Process_Score(diem, S_score, text_score, font);  
 
 				if (checkplay == true)
@@ -151,8 +152,8 @@ int Play::Run(sf::RenderWindow &window)
 						Process_Assign(toantu, text_assign, font);
 						Process_RandomResult(so, S_RandomResult, text_RandomResult, font);
 
-						updateLevel(diem, capdo);  // update to higher level
-						clock.restart();           // reset timer 
+						updateLevel(diem, capdo);  // nang cap do 
+						clock.restart();           // khoi dong lai bien dem
 					}
 				}
 				break;
@@ -190,8 +191,8 @@ int Play::Run(sf::RenderWindow &window)
 		}
 		else if(dieukien.flag==1&&diem.score>0)
 		{
-			sf::Time elapsed = clock.getElapsedTime();       // bien dem thoi gian
-			sf::Int32 countdown = elapsed.asMilliseconds();  // bien chay thoi gian
+			sf::Time elapsed = clock.getElapsedTime();       // bien dem thoi gian da qua
+			sf::Int32 countdown = elapsed.asMilliseconds();  // bien chuyen thoi gian tu kieu Time sang Int
 			if (elapsed.asMilliseconds() >= timeline.asMilliseconds())
 			{
 				dieukien.flag = 2;

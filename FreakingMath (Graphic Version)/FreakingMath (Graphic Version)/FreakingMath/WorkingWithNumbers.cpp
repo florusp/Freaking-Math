@@ -35,7 +35,7 @@ void resultRandom(So &so, Toantu &toantu)
 	case 2:
 		toantu.Operator = "-";
 		so.result = so.num1 - so.num2;
-		so.randomResult = rand() % 3 + so.result;       // 3 la so gia tri co the co cua randomResult
+		so.randomResult = rand() % 3 + so.result; // 3 la so gia tri co the co cua randomResult
 		if (so.randomResult == so.num1)
 			so.randomResult++;
 		break;

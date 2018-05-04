@@ -23,6 +23,7 @@ int main()
 	//Main loop
 	while (screen >= 0)
 	{
+		// tra ve gia tri cua chi so mang Screens
 		screen = Screens[screen]->Run(window);
 	}
 

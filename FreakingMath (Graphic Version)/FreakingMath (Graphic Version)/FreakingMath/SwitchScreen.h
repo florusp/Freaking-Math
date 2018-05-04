@@ -6,8 +6,8 @@
 /*man hinh tro choi*/
 class Screen
 {
-public:
-	virtual int Run(sf::RenderWindow &window) = 0;
+	public:
+		virtual int Run(sf::RenderWindow &window) = 0;
 };
 
 #endif
