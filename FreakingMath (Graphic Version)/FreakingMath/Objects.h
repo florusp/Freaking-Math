@@ -37,12 +37,6 @@ struct DieuKienTroChoi
 	int flag = 1;
 	double timeCounter = 2;
 
-	/*void delay(int ms)
-	{
-		clock_t timeDelay = ms + clock();
-		while (timeDelay > clock());
-	}*/
-
 };
 
 struct TraLoi

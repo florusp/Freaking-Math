@@ -10,11 +10,11 @@ void Process_Calculation(So &so, Toantu &toantu, string &S_num1, string &S_num2,
 
 	//dat vi tri cua phep tinh cho phu hop 
 	if(so.num1<10&&so.num2<10)
-		text_calculation.setPosition(sf::Vector2f(200 / 2.0f, 700 / 2.0f));
+		text_calculation.setPosition(sf::Vector2f(200 / 2.0f, 200 / 2.0f));
 	else if((so.num1>10&&so.num2<10)||(so.num1<10&&so.num2>10))
-		text_calculation.setPosition(sf::Vector2f(150 / 2.0f, 700 / 2.0f));
+		text_calculation.setPosition(sf::Vector2f(150 / 2.0f, 200 / 2.0f));
 	else
-		text_calculation.setPosition(sf::Vector2f(100 / 2.0f, 700 / 2.0f));
+		text_calculation.setPosition(sf::Vector2f(100 / 2.0f, 200 / 2.0f));
 
 	//chinh co chu
 	text_calculation.setCharacterSize(150);  
@@ -30,7 +30,7 @@ void Process_Assign(Toantu &toantu, sf::Text &text_assign, sf::Font &font)
 {
 	text_assign.setFont(font);
 	text_assign.setString(toantu.assign);
-	text_assign.setPosition(sf::Vector2f(350 / 2.0f, 1000 / 2.0f));
+	text_assign.setPosition(sf::Vector2f(350 / 2.0f, 500 / 2.0f));
 	text_assign.setCharacterSize(150);
 	text_assign.setFillColor(sf::Color::White);
 	text_assign.setStyle(sf::Text::Bold);
@@ -41,7 +41,7 @@ void Process_RandomResult(So &so, string &S_RandomResult, sf::Text &text_RandomR
 	S_RandomResult = to_string(so.randomResult);
 	text_RandomResult.setFont(font);
 	text_RandomResult.setString(S_RandomResult);
-	text_RandomResult.setPosition(sf::Vector2f(600 / 2.0f, 1000 / 2.0f));
+	text_RandomResult.setPosition(sf::Vector2f(600 / 2.0f, 500 / 2.0f));
 	text_RandomResult.setCharacterSize(150);
 	text_RandomResult.setFillColor(sf::Color::White);
 	text_RandomResult.setStyle(sf::Text::Bold);

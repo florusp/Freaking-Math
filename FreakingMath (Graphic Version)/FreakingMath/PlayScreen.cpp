@@ -80,7 +80,7 @@ int Play::Run(sf::RenderWindow &window)
 	}
 	sf::Sprite TrueButton;
 	TrueButton.setTexture(TrueButton_Image);
-	TrueButton.setPosition(sf::Vector2f(65, 100));  // cai dat vi tri cua nut
+	TrueButton.setPosition(sf::Vector2f(65, 500));  // cai dat vi tri cua nut
 	TrueButton.setTextureRect(sf::IntRect(0, 0, 237, 203)); // cai dat do phan giai cua nut
 
 
@@ -93,7 +93,7 @@ int Play::Run(sf::RenderWindow &window)
 	}
 	sf::Sprite FalseButton;
 	FalseButton.setTexture(FalseButton_Image);
-	FalseButton.setPosition(sf::Vector2f(310, 100));  // cai dat vi tri cua nut
+	FalseButton.setPosition(sf::Vector2f(310, 500));  // cai dat vi tri cua nut
 	FalseButton.setTextureRect(sf::IntRect(0, 0, 223, 206));  // cai dat do phan giai cua nut
 
 
