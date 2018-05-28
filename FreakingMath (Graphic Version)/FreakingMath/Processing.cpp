@@ -2,21 +2,27 @@
 
 void Process_Calculation(So &so, Toantu &toantu, string &S_num1, string &S_num2, string &calculation, sf::Text &text_calculation, sf::Font &font)
 {
-	S_num1 = to_string(so.num1);
-	S_num2 = to_string(so.num2);
+	S_num1 = to_string(so.num1);    // chuyen dang int cua so thu nhat sang dang string
+	S_num2 = to_string(so.num2);    // chuyen dang int cua so thu hai sang dang string
 	calculation = S_num1 + " " + toantu.Operator + " " + S_num2;
 	text_calculation.setFont(font);
-	text_calculation.setString(calculation);
+	text_calculation.setString(calculation); 
 
+	//dat vi tri cua phep tinh cho phu hop 
 	if(so.num1<10&&so.num2<10)
-		text_calculation.setPosition(sf::Vector2f(200 / 2.0f, 200 / 2.0f));
+		text_calculation.setPosition(sf::Vector2f(200 / 2.0f, 700 / 2.0f));
 	else if((so.num1>10&&so.num2<10)||(so.num1<10&&so.num2>10))
-		text_calculation.setPosition(sf::Vector2f(150 / 2.0f, 200 / 2.0f));
+		text_calculation.setPosition(sf::Vector2f(150 / 2.0f, 700 / 2.0f));
 	else
-		text_calculation.setPosition(sf::Vector2f(100 / 2.0f, 200 / 2.0f));
+		text_calculation.setPosition(sf::Vector2f(100 / 2.0f, 700 / 2.0f));
 
-	text_calculation.setCharacterSize(150);
+	//chinh co chu
+	text_calculation.setCharacterSize(150);  
+
+	//chinh mau chu
 	text_calculation.setFillColor(sf::Color::White);
+
+	//dinh dang kieu chu
 	text_calculation.setStyle(sf::Text::Bold);
 }
 
@@ -24,7 +30,7 @@ void Process_Assign(Toantu &toantu, sf::Text &text_assign, sf::Font &font)
 {
 	text_assign.setFont(font);
 	text_assign.setString(toantu.assign);
-	text_assign.setPosition(sf::Vector2f(350 / 2.0f, 500 / 2.0f));
+	text_assign.setPosition(sf::Vector2f(350 / 2.0f, 1000 / 2.0f));
 	text_assign.setCharacterSize(150);
 	text_assign.setFillColor(sf::Color::White);
 	text_assign.setStyle(sf::Text::Bold);
@@ -35,7 +41,7 @@ void Process_RandomResult(So &so, string &S_RandomResult, sf::Text &text_RandomR
 	S_RandomResult = to_string(so.randomResult);
 	text_RandomResult.setFont(font);
 	text_RandomResult.setString(S_RandomResult);
-	text_RandomResult.setPosition(sf::Vector2f(600 / 2.0f, 500 / 2.0f));
+	text_RandomResult.setPosition(sf::Vector2f(600 / 2.0f, 1000 / 2.0f));
 	text_RandomResult.setCharacterSize(150);
 	text_RandomResult.setFillColor(sf::Color::White);
 	text_RandomResult.setStyle(sf::Text::Bold);

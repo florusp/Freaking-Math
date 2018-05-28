@@ -4,7 +4,10 @@
 #include<SFML/Graphics.hpp>
 #include"Objects.h"
 
-void IsButtonPressed(sf::Sprite &CheckButton, sf::Sprite &XButton, sf::RenderWindow &window, bool &check, TraLoi &traloi);
+/*kiem tra xem nut da duoc bam chua*/
+void IsButtonPressed(sf::Sprite &TrueButton, sf::Sprite &FalseButton, sf::RenderWindow &window, bool &check, TraLoi &traloi);
+
+/*kiem tra xem nut play duoc bam chua*/
 void IsPlayButtonPressed(sf::Sprite &playButton, sf::RenderWindow &window, bool &check);
 
 #endif // !BUTTONPRESSED_h

@@ -26,12 +26,10 @@ void checkTheAnswer(TraLoi &traloi, DieuKienTroChoi &dieukien, So &so)
 	if (traloi.ans == traloi.checkAns)
 	{
 		dieukien.flag = 1;
-		//cout << "TRUE";
-		//system("cls");
 	}
 	else
 	{
 		dieukien.flag = 2;
-		//cout << "FALSE";
 	}
+
 }

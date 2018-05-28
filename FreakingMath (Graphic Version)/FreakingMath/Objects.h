@@ -6,8 +6,11 @@
 
 struct So
 {
-	int num1, num2;
+	int num1, num2; 
 	int result, randomResult;
+
+	int RightNum1, RightNum2;
+	int RightResult;
 };
 
 struct Toantu
@@ -34,11 +37,11 @@ struct DieuKienTroChoi
 	int flag = 1;
 	double timeCounter = 2;
 
-	void delay(int ms)
+	/*void delay(int ms)
 	{
 		clock_t timeDelay = ms + clock();
 		while (timeDelay > clock());
-	}
+	}*/
 
 };
 

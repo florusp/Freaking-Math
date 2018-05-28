@@ -9,68 +9,71 @@ using namespace std;
 
 int GameOver::Run(sf::RenderWindow &window)
 {
-	bool checkContinue;
+	bool checkContinue;  /*bien kiem tra xem co tiep tuc tro choi khong*/
 
-	Diem GetBestScore;
+	Diem GetBestScore;   /*lay diem cao nhat*/
 
-	string S_BestScore;
+	string S_BestScore;  /*dang string cua BestScore*/
 
-	sf::Text text_bestscore;
+	sf::Text text_bestscore; /*dang text cua BestScore*/
 
-	sf::Font font;                            // load font
-	if (!font.loadFromFile("ANCUU.ttf"))
+
+	//load font
+	sf::Font font;   
+	if (!font.loadFromFile("VAVKI.ttf"))
 	{
-		cout << "Error Loading File";
+		std::cout << "Error Loading File";
 	}
 
+	//set text fail
 	sf::Text fail;
 	fail.setFont(font);
 	fail.setString("You Failed!");
-	fail.setPosition(150, 200);
+	fail.setPosition(130, 200);
 	fail.setCharacterSize(50);
 	fail.setFillColor(sf::Color::Red);
-	fail.setStyle(sf::Text::Bold);
 
+	
+	//set text continue
 	sf::Text Continue;
 	Continue.setFont(font);
 	Continue.setString("Play Again?");
-	Continue.setPosition(150, 300);
+	Continue.setPosition(130, 300);
 	Continue.setCharacterSize(50);
-	fail.setFillColor(sf::Color::Red);
-	fail.setStyle(sf::Text::Bold);
 
-	sf::Text BestScore;
-	BestScore.setFont(font);
-	BestScore.setString("Best Score: ");
-	BestScore.setPosition(120, 600);
-	BestScore.setCharacterSize(50);
-	BestScore.setFillColor(sf::Color::White);
-	BestScore.setStyle(sf::Text::Bold);
 
+	//load continue button
 	sf::Texture ContinueButton_Image;
+	sf::Sprite ContinueButton;
 	if (!ContinueButton_Image.loadFromFile("playButton.png"))
 	{
 		cout << "Error Loading File";
 	}
-	sf::Sprite ContinueButton;
 	ContinueButton.setTexture(ContinueButton_Image);
 	ContinueButton.setPosition(sf::Vector2f(200, 450));
 	ContinueButton.setTextureRect(sf::IntRect(0, 0, 184, 81));
 
-	///////////////////////
+	//set text bestscore;
+	sf::Text BestScore;
+	BestScore.setFont(font);
+	BestScore.setString("Best Score: ");
+	BestScore.setPosition(80, 600);
+	BestScore.setCharacterSize(50);
+	BestScore.setFillColor(sf::Color::White);
 
+
+	//load false sound
 	sf::SoundBuffer FalseSound;
+	sf::Sound False;
 	if (!FalseSound.loadFromFile("FalseSound.flac"))
 	{
-		cout << "Error Loading File";
+		std::cout << "Error Loading File";
 	}
-
-	sf::Sound False;
 	False.setBuffer(FalseSound);
 	False.play();
 
-	/////////////////////////
 
+	//load best score
 	readBestScore(GetBestScore);
 	Process_BestScore(GetBestScore.Best_Score, S_BestScore, text_bestscore, font);
 
@@ -91,6 +94,7 @@ int GameOver::Run(sf::RenderWindow &window)
 
 					if (checkContinue == true)
 					{
+						// tra gia tri cua ham Run de chuyen ve man hinh PlayScreen
 						return 1;
 					}
 			}
