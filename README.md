@@ -1,5 +1,7 @@
 Tên Trò Chơi: Freaking Math
+
 Tác giả: Triệu Phong
+
 Thời gian hoàn thành: 2 tuần
 
 Luật Chơi:
